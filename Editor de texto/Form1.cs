@@ -3,7 +3,7 @@ namespace Editor_de_texto
     public partial class Form1 : Form
     {
         Lista[] Alfabeto = new Lista[27];
-
+        string caminho = "Dicionario.txt";
         public class No
         {
             public string elemento;
@@ -67,6 +67,11 @@ namespace Editor_de_texto
         public Form1()
         {
             InitializeComponent();
+            for (int i = 0; i < 27; i++)
+            {
+                Alfabeto[i] = new Lista();
+            }
+            AtualizarDicionario();
         }
 
         private void ajudaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,13 +141,9 @@ namespace Editor_de_texto
         private void AtualizarDicionario()
         {
             char[] limitadores = new char[] { ' ', '\r', '\n', ',', '\t' };
-            string txtDicionario = File.ReadAllText("Dicionario.txt");
+            string txtDicionario = File.ReadAllText(caminho);
             string[] palavras = txtDicionario.ToLower().Split(limitadores, StringSplitOptions.RemoveEmptyEntries);
             char a;
-            for (int i = 0; i < 27; i++)
-            {
-                Alfabeto[i] = new Lista();
-            }
             for (int i = 0; i < palavras.Length; i++)
             {
                 a = palavras[i][0];
@@ -232,10 +233,18 @@ namespace Editor_de_texto
                 }
             }
         }
+        private void AddDicionario(string s)
+        {
+            StreamWriter Escritor;
 
+            Escritor = File.AppendText(caminho);
+            Escritor.Write(s+" ");
+            Escritor.Close();
+            AtualizarDicionario();
+        }
         private void Marcar(string a)
         {
-            int inicio=0;
+            int inicio = 0;
             while (inicio<richTextBox1.TextLength)
             {
                 int inicioPalavra = richTextBox1.Find(a,inicio,RichTextBoxFinds.None);
@@ -243,7 +252,7 @@ namespace Editor_de_texto
                 {
                     richTextBox1.SelectionStart = inicioPalavra;
                     richTextBox1.SelectionLength = a.Length;
-                    richTextBox1.SelectionBackColor = Color.Yellow;
+                    richTextBox1.SelectionBackColor = Color.Coral;
                 }
                 else
                 {
@@ -255,14 +264,15 @@ namespace Editor_de_texto
 
         private void verificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AtualizarDicionario();
+
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionBackColor = Color.White;
             string txtEditor = richTextBox1.Text;
             char[] limitadores = new char[] { ' ', '\r', '\n', ',', '\t' };
             string[] palavras = txtEditor.ToLower().Split(limitadores,StringSplitOptions.RemoveEmptyEntries);
             char a;
             for (int i = 0; i < palavras.Length; i++)
             {
-                bool possui = true;
                 a = palavras[i][0];
                 switch (a)
                 {
@@ -349,14 +359,6 @@ namespace Editor_de_texto
                         break;
                 }
             }
-
-
-
-
-
-
-
-
         }
 
         private void fonteToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -369,6 +371,11 @@ namespace Editor_de_texto
         {
             colorDialog1.ShowDialog();
             richTextBox1.SelectionColor = colorDialog1.Color;
+        }
+
+        private void adicionarAoDicionárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddDicionario(richTextBox1.SelectedText);
         }
     }
 }

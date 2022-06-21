@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,10 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.adicionarAoDicionárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -238,14 +242,14 @@
             // fonteToolStripMenuItem1
             // 
             this.fonteToolStripMenuItem1.Name = "fonteToolStripMenuItem1";
-            this.fonteToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.fonteToolStripMenuItem1.Size = new System.Drawing.Size(104, 22);
             this.fonteToolStripMenuItem1.Text = "Fonte";
             this.fonteToolStripMenuItem1.Click += new System.EventHandler(this.fonteToolStripMenuItem1_Click);
             // 
             // corToolStripMenuItem
             // 
             this.corToolStripMenuItem.Name = "corToolStripMenuItem";
-            this.corToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.corToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.corToolStripMenuItem.Text = "Cor";
             this.corToolStripMenuItem.Click += new System.EventHandler(this.corToolStripMenuItem_Click);
             // 
@@ -258,6 +262,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.ContextMenuStrip = this.contextMenuStrip1;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 24);
             this.richTextBox1.Name = "richTextBox1";
@@ -269,6 +274,20 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adicionarAoDicionárioToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 26);
+            // 
+            // adicionarAoDicionárioToolStripMenuItem
+            // 
+            this.adicionarAoDicionárioToolStripMenuItem.Name = "adicionarAoDicionárioToolStripMenuItem";
+            this.adicionarAoDicionárioToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.adicionarAoDicionárioToolStripMenuItem.Text = "Adicionar ao dicionário";
+            this.adicionarAoDicionárioToolStripMenuItem.Click += new System.EventHandler(this.adicionarAoDicionárioToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -282,6 +301,7 @@
             this.Text = "Editor de texto";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,5 +337,7 @@
         private ColorDialog colorDialog1;
         private FontDialog fontDialog1;
         private ToolStripMenuItem verificarToolStripMenuItem;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem adicionarAoDicionárioToolStripMenuItem;
     }
 }
