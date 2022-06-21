@@ -72,6 +72,22 @@ namespace Editor_de_texto
                 Alfabeto[i] = new Lista();
             }
             AtualizarDicionario();
+
+            //Formatando Dicionario
+            string txtDicionario = File.ReadAllText(caminho);
+            char[] limitadores = new char[] { ' ', '\r', '\n', ',', '\t' };
+            File.WriteAllText(caminho, String.Empty);
+            string[] palavras = txtDicionario.ToLower().Split(limitadores, StringSplitOptions.RemoveEmptyEntries);
+            StreamWriter sw;
+            sw = File.AppendText(caminho);
+            sw.Write(" ");
+            for (int i = 0; i < palavras.Length; i++)
+            {
+                palavras[i] += " ";
+                sw.Write(palavras[i]);
+            }
+            sw.Close();
+
         }
 
         private void ajudaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,7 +152,7 @@ namespace Editor_de_texto
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Editor de texto feito em c#, capaz de identificar palavras em um dicionário\nFeito por: Herik Lemos e Gabriel Reis");
+            MessageBox.Show("Editor de texto feito em C#, capaz de identificar palavras que não estão presentes em um dicionário e destacando-as\nFeito por: Herik Lemos e Gabriel Reis");
         }
         private void AtualizarDicionario()
         {
@@ -241,14 +257,15 @@ namespace Editor_de_texto
             Escritor.Write(s+" ");
             Escritor.Close();
             AtualizarDicionario();
+            MessageBox.Show("Palavra(s) adicionadas com sucesso!");
         }
         private void Marcar(string a)
         {
             int inicio = 0;
-            while (inicio<richTextBox1.TextLength)
+            while (inicio < richTextBox1.TextLength)
             {
-                int inicioPalavra = richTextBox1.Find(a,inicio,RichTextBoxFinds.None);
-                if (inicioPalavra!=-1)
+                int inicioPalavra = richTextBox1.Find(a, inicio, RichTextBoxFinds.None);
+                if (inicioPalavra != -1)
                 {
                     richTextBox1.SelectionStart = inicioPalavra;
                     richTextBox1.SelectionLength = a.Length;
