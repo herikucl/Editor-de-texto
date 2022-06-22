@@ -107,8 +107,11 @@ namespace Editor_de_texto
         private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Arquivos de texto |*.txt";
-            saveFileDialog1.ShowDialog();
-            richTextBox1.SaveFile(saveFileDialog1.FileName);
+            saveFileDialog1.FilterIndex = 2;
+            if (saveFileDialog1.ShowDialog()==DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog1.FileName, richTextBox1.Text);
+            }
         }
 
         private void desfazerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -273,6 +276,7 @@ namespace Editor_de_texto
                     break;
                 }
                 inicio = inicioPalavra + a.Length;
+                
             }
         }
 
