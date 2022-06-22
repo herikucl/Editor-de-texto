@@ -106,6 +106,7 @@ namespace Editor_de_texto
 
         private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.Filter = "Arquivos de texto |*.txt";
             saveFileDialog1.ShowDialog();
             richTextBox1.SaveFile(saveFileDialog1.FileName);
         }
@@ -142,7 +143,7 @@ namespace Editor_de_texto
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Editor de texto feito em C#, capaz de identificar palavras que não estão presentes em um dicionário e destacando-as\nFeito por: Herik Lemos e Gabriel Reis");
+            MessageBox.Show("Editor de texto feito em C#, capaz de identificar palavras que não estão presentes em um dicionário e destacando-as.\nFeito por: Herik Lemos e Gabriel Reis","Trabalho AED2 2022/1");
         }
         private void AtualizarDicionario()
         {
