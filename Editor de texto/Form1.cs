@@ -2,8 +2,9 @@ namespace Editor_de_texto
 {
     public partial class Form1 : Form
     {
-        Lista[] Alfabeto = new Lista[27];
+        Lista[] Alfabeto = new Lista[27]; // Lista 0 a 25 para cada letra do alfabeto e a ultima lista para simbolos 
         string caminho = "Dicionario.txt";
+        int inicio = 0;
         public class No
         {
             public string elemento;
@@ -157,89 +158,14 @@ namespace Editor_de_texto
             for (int i = 0; i < palavras.Length; i++)
             {
                 a = palavras[i][0];
-                switch (a)
+
+                if ((a >= 97) && (a <= 122)) // A primeira letra está entre a - z
                 {
-                    case 'a':
-                        Alfabeto[0].inserir(palavras[i]);
-                        break;
-                    case 'b':
-                        Alfabeto[1].inserir(palavras[i]);
-                        break;
-                    case 'c':
-                        Alfabeto[2].inserir(palavras[i]);
-                        break;
-                    case 'd':
-                        Alfabeto[3].inserir(palavras[i]);
-                        break;
-                    case 'e':
-                        Alfabeto[4].inserir(palavras[i]);
-                        break;
-                    case 'f':
-                        Alfabeto[5].inserir(palavras[i]);
-                        break;
-                    case 'g':
-                        Alfabeto[6].inserir(palavras[i]);
-                        break;
-                    case 'h':
-                        Alfabeto[7].inserir(palavras[i]);
-                        break;
-                    case 'i':
-                        Alfabeto[8].inserir(palavras[i]);
-                        break;
-                    case 'j':
-                        Alfabeto[9].inserir(palavras[i]);
-                        break;
-                    case 'k':
-                        Alfabeto[10].inserir(palavras[i]);
-                        break;
-                    case 'l':
-                        Alfabeto[11].inserir(palavras[i]);
-                        break;
-                    case 'm':
-                        Alfabeto[12].inserir(palavras[i]);
-                        break;
-                    case 'n':
-                        Alfabeto[13].inserir(palavras[i]);
-                        break;
-                    case 'o':
-                        Alfabeto[14].inserir(palavras[i]);
-                        break;
-                    case 'p':
-                        Alfabeto[15].inserir(palavras[i]);
-                        break;
-                    case 'q':
-                        Alfabeto[16].inserir(palavras[i]);
-                        break;
-                    case 'r':
-                        Alfabeto[17].inserir(palavras[i]);
-                        break;
-                    case 's':
-                        Alfabeto[18].inserir(palavras[i]);
-                        break;
-                    case 't':
-                        Alfabeto[19].inserir(palavras[i]);
-                        break;
-                    case 'u':
-                        Alfabeto[20].inserir(palavras[i]);
-                        break;
-                    case 'v':
-                        Alfabeto[21].inserir(palavras[i]);
-                        break;
-                    case 'w':
-                        Alfabeto[22].inserir(palavras[i]);
-                        break;
-                    case 'x':
-                        Alfabeto[23].inserir(palavras[i]);
-                        break;
-                    case 'y':
-                        Alfabeto[24].inserir(palavras[i]);
-                        break;
-                    case 'z':
-                        Alfabeto[25].inserir(palavras[i]);
-                        break;
-                    default:
-                        Alfabeto[26].inserir(palavras[i]);
-                        break;
+                    Alfabeto[a-97].inserir(palavras[i]);
+                }
+                else
+                {
+                    Alfabeto[26].inserir(palavras[i]);
                 }
             }
         }
@@ -261,7 +187,6 @@ namespace Editor_de_texto
         }
         private void Marcar(string a)
         {
-            int inicio = 0;
             while (inicio < richTextBox1.TextLength)
             {
                 int inicioPalavra = richTextBox1.Find(a, inicio, RichTextBoxFinds.WholeWord);
@@ -270,19 +195,20 @@ namespace Editor_de_texto
                     richTextBox1.SelectionStart = inicioPalavra;
                     richTextBox1.SelectionLength = a.Length;
                     richTextBox1.SelectionBackColor = Color.Coral;
+                    inicio = inicioPalavra + a.Length;
+                    break;
                 }
                 else
                 {
                     break;
-                }
-                inicio = inicioPalavra + a.Length;
-                
+                } 
             }
+            richTextBox1.DeselectAll();
         }
 
         private void verificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            inicio = 0;
             richTextBox1.SelectAll();
             richTextBox1.SelectionBackColor = Color.White;
             string txtEditor = richTextBox1.Text;
@@ -292,89 +218,20 @@ namespace Editor_de_texto
             for (int i = 0; i < palavras.Length; i++)
             {
                 a = palavras[i][0];
-                switch (a)
+
+                if ((a >= 97) && (a <= 122)) // A primeira letra está entre a - z
                 {
-                    case 'a':
-                        if (!Alfabeto[0].contem(palavras[i])){ Marcar(palavras[i]); }
-                        break;
-                    case 'b':
-                        if (!Alfabeto[1].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'c':
-                        if (!Alfabeto[2].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'd':
-                        if (!Alfabeto[3].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'e':
-                        if (!Alfabeto[4].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'f':
-                        if (!Alfabeto[5].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'g':
-                        if (!Alfabeto[6].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'h':
-                        if (!Alfabeto[7].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'i':
-                        if (!Alfabeto[8].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'j':
-                        if (!Alfabeto[9].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'k':
-                        if (!Alfabeto[10].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'l':
-                        if (!Alfabeto[11].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'm':
-                        if (!Alfabeto[12].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'n':
-                        if (!Alfabeto[13].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'o':
-                        if (!Alfabeto[14].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'p':
-                        if (!Alfabeto[15].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'q':
-                        if (!Alfabeto[16].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'r':
-                        if (!Alfabeto[17].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 's':
-                        if (!Alfabeto[18].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 't':
-                        if (!Alfabeto[19].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'u':
-                        if (!Alfabeto[20].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'v':
-                        if (!Alfabeto[21].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'w':
-                        if (!Alfabeto[22].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'x':
-                        if (!Alfabeto[23].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'y':
-                        if (!Alfabeto[24].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    case 'z':
-                        if (!Alfabeto[25].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
-                    default:
-                        if (!Alfabeto[26].contem(palavras[i])) { Marcar(palavras[i]); }
-                        break;
+                    if (!Alfabeto[a-97].contem(palavras[i]))
+                    {
+                        Marcar(palavras[i]);
+                    }
+                }
+                else
+                {
+                    if (!Alfabeto[26].contem(palavras[i]))
+                    {
+                        Marcar(palavras[i]);
+                    }
                 }
             }
         }
