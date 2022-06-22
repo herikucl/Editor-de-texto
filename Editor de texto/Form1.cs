@@ -90,19 +90,9 @@ namespace Editor_de_texto
 
         }
 
-        private void ajudaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void novaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = " ";
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -254,17 +244,23 @@ namespace Editor_de_texto
             StreamWriter Escritor;
 
             Escritor = File.AppendText(caminho);
-            Escritor.Write(s+" ");
+
+            char[] limitadores = new char[] { ' ', '\r', '\n', ',', '\t' };
+            string[] palavras = s.ToLower().Split(limitadores, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < palavras.Length; i++)
+            {
+                Escritor.Write(palavras[i] + " ");
+            }
             Escritor.Close();
             AtualizarDicionario();
-            MessageBox.Show("Palavra(s) adicionadas com sucesso!");
+            MessageBox.Show("Palavra(s) adicionadas com sucesso!","Dicionario modificado");
         }
         private void Marcar(string a)
         {
             int inicio = 0;
             while (inicio < richTextBox1.TextLength)
             {
-                int inicioPalavra = richTextBox1.Find(a, inicio, RichTextBoxFinds.None);
+                int inicioPalavra = richTextBox1.Find(a, inicio, RichTextBoxFinds.WholeWord);
                 if (inicioPalavra != -1)
                 {
                     richTextBox1.SelectionStart = inicioPalavra;
